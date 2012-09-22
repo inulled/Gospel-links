@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic/LICENSE
+END
+magickwand_im_defs.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic/magickwand_im_defs.h
+END
+TODO
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic/TODO
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic/Makefile.in
+END
+config.w32
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic/config.w32
+END
+AUTHOR
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic/AUTHOR
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic/README
+END
+buildconf
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic/buildconf
+END
+config.m4
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic/config.m4
+END
+magickwand.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic/magickwand.c
+END
+ChangeLog
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic/ChangeLog
+END
+magickwand_inc.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic/magickwand_inc.h
+END
+magickwand.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic/magickwand.h
+END
+CREDITS
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic/CREDITS
+END
+INSTALL
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/11/trunk/vd/1.0/New/scripts/source/imagemagic/INSTALL
+END
