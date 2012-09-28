@@ -380,8 +380,8 @@ user-select: none;
 }
 .fontFont2 { font-family: tahoma; font-size: 8pt; font-weight: bold; color: #00416A }
 .link-font1_dashboard {
-	font-family: Verdana;
-	font-size: 8pt;
+	font-family: Tahoma;
+	font-size: 10pt;
 	color: #924227;
 	cursor: pointer;
 	text-decoration: none;

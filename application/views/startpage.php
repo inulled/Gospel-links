@@ -1,9 +1,8 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head>
-<?php include('vh.php'); ?>
 	<!-- Add elastic library -->
-	<script src="<?=base_url().$ldr?>scripts/lib/jquery.elastic.source.js"></script>
-	<script src="<?=base_url().$ldr?>scripts/lib/jquery.tinyscrollbar.min.js"></script>
+	<script src="<?=base_url()?>vd/1.0/New/scripts/lib/jquery.elastic.source.js"></script>
+	<script src="<?=base_url()?>vd/1.0/New/scripts/lib/jquery.tinyscrollbar.min.js"></script>
 	<? $logged = $this->session->userdata("logged") ?>
 
 <script type="text/javascript">
@@ -254,11 +253,8 @@ $(document).ready(function() {
 <div class="changeWallTypeBox">
 	<span class="font1">
 		All proceeding wall posts are from all users across Gospel-links.org
-	<?php $sess = $this->session->userdata('userid');
-		  $query2 = $this->db->query("SELECT * FROM churchmembers WHERE cMuserId = '{$sess}'"); // grab currently logged in users church
-		  foreach ($query2->result() as $row) { ?>
-	</span><br><a class="link-font3" href="<?=base_url()?>index.php/routers/regUserDash?churchid=<?=$row->cMchurchId?>&requestedPageType=wall_1">Click here to go to your churches wall</a></div>
-<?php } } elseif ($logged == '0') { } ?>
+	</span><br><a class="link-font3" href="<?=base_url()?>index.php/routers/regUserDash?requestedPageType=wall_1">Click here to go to your churches wall</a></div>
+<?php } elseif ($logged == '0') { } ?>
 <?php $this->load->helper('date');
 	  $userid = $this->session->userdata('userid');
 	   $query = $this->db->query("SELECT * FROM wallposts wp, users u WHERE u.userid = wp.postingUserId ORDER BY wp.idWallPosts DESC LIMIT 200");
@@ -332,4 +328,3 @@ $(document).ready(function() {
 
 </html>
 <?php } //} ?>
-</div>

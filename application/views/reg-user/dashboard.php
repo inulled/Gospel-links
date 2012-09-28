@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head>
 	<!-- Load View Data-->
 	<?php include('vh.php'); ?>
+	<link href='http://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
 	<!-- Load Elastic Script-->
 	<script src="<?=base_url().$ldr?>scripts/lib/jquery.elastic.source.js"></script>
 	<!-- Load Timeago Script-->
@@ -225,50 +226,62 @@ function showResults(data, highlight) {
             }); $(this).find("span").hide();
      	}
     )
+	
+	$('#deny').click(function() {
+		alert("You clicked on deny with an index of " + $('#deny').index(this));
+	});
+	
+	function cancelFriendship() {
+		jQuery.ajax({
+			type: "POST",
+			dataType: "JSON",
+			url: "<?=base_url()?>index.php/regUserDash/cancelFriendship",
+			data: { targetedUserId: targetedUserId },
+			json: {friendshipCaneled: true},
+			success: function(data) {
+			if(data.friendshipCanceled == true) {
+				$("#cancelFriendship").replaceWith('<span class="font1">You two are no longer friends </span>');
+			}
+		  }
+	});
+	}
 });
 </script>
 <style type="text/css">
-.form {
-      margin:15px;
-      padding:5px;
-      border-bottom:1px solid #ddd;
-    }
-      form input[type=submit]{display:none;}
-
-      div#results{
-        padding:10px 0px 0px 15px;
-       }
-
-      div#results div.result{
-           padding:10px 0px;
-           margin:10px 0px 10px;
-       }
-
-      div#results div.result a.readMore{color:green;}
-
-      div#results div.result h2{
-       font-size:19px;
-       margin:0px 0px 5px;
-       padding:0px;
-       color:#1111CC;
-       font-weight:normal;
-       }
-
-      div#results div.result h2 a{
-        text-decoration:none;
-       border-bottom:1px solid #1111cc;
+	.form {
+      	margin: 15px;
+      	padding: 5px;
+      	border-bottom: 1px solid #ddd;
       }
-
-      div#results div.result p{
-       margin:0;
-      padding:0;
-}
-
-      span.highlight{
+      form input[type=submit] { display:none; }
+      div#results {
+        padding: 10px 0px 0px 15px;
+       }
+       div#results div.result {
+      	padding: 10px 0px;
+        margin: 10px 0px 10px;
+       }
+      div#results div.result a.readMore { color:green; }
+      div#results div.result h2 {
+      	font-size: 19px;
+       	margin: 0px 0px 5px;
+       	padding: 0px;
+       	color: #1111CC;
+       	font-weight: normal;
+       }
+      div#results div.result h2 a {
+      	text-decoration: none;
+      	border-bottom: 1px solid #1111cc;
+      }
+      div#results div.result p {
+      	margin: 0;
+      	padding: 0;
+      }
+      span.highlight {
        background:#FCFFA3;
        padding:3px;
        font-weight:bold;
-}
+      }
 .dropdownResults {
 	 position: fixed;
 	 background-color: white;
@@ -365,7 +378,7 @@ function showResults(data, highlight) {
         $row = $query1->row();
         foreach ($query1->result() as $row1) { */
 ?>
-<body style="background-color: #f9f9f9"> <!-- old: f9f9f9, #ede8cb, fcf7da -->
+<body style="background-color: #f9f9f9;"> <!-- old: f9f9f9, #ede8cb, fcf7da -->
 		<?php $logged = $this->session->userdata('logged');
 			  if ($logged == '1') { ?>
 		<table style="width: 100%" align="center" class="navbarStyle">
@@ -373,19 +386,19 @@ function showResults(data, highlight) {
 				<td>
 				<table style="width: 754px" cellspacing="0" cellpadding="0" align="center" class="navBarStyle1">
 					<tr>
-						<td id="home" style="padding: 2pt; border-left: 1px solid #D6957E; border-right: 1px none #D6957E; border-top: 1px none #D6957E; border-bottom: 1px none #D6957E; width: 100px" class="style1 area1">Home</td>
+						<td id="home" style="font-family: 'Courgette', cursive; padding: 2pt; border-left: 1px solid #D6957E; border-right: 1px none #D6957E; border-top: 1px none #D6957E; border-bottom: 1px none #D6957E; width: 100px" class="area1">Home</td>
 						<?php if ($this->session->userdata('logged') == '1') {
 							$userid = $this->session->userdata('userid'); ?>
-							<td style="border-left: 1px solid #D6957E; border-right: 1px none #D6957E; border-top: 1px none #D6957E; border-bottom: 1px none #D6957E; width: 100px" class="area1"><a class="link-font4_dashboard" href="<?=base_url()?>index.php/routers/regUserDash?id=<?=$userid?>&requestedPageType=userProfiles">Profile</a></td>
+							<td style="border-left: 1px solid #D6957E; border-right: 1px none #D6957E; border-top: 1px none #D6957E; border-bottom: 1px none #D6957E; width: 100px" class="area1"><a style="font-family: 'Courgette', cursive" class="link-font4_dashboard" href="<?=base_url()?>index.php/routers/regUserDash?id=<?=$userid?>&requestedPageType=userProfiles">Profile</a></td>
 						<?php } elseif ($this->session->userdata('logged') == '0') { ?>
-							<td style="border-style: none none none solid; border-width: 1px; border-color: #D6957E; width: 100px" class="area1">Profile</td>
+							<td style="font-family: 'Courgette', cursive; border-style: none none none solid; border-width: 1px; border-color: #D6957E; width: 100px; font-family: 'Courgette', cursive" class="area1">Profile</td>
 						<?php } ?>
-						<td style="border-style: none none none solid; border-width: 1px; border-color: #D6957E; width: 100px" class="area1">Mail</td>
+						<td style="border-style: none none none solid; border-width: 1px; border-color: #D6957E; width: 100px; font-family: 'Courgette', cursive" class="area1">Mail</td>
 						<?php if ($this->session->userdata('logged') == '1') { ?>
-							<td id="churchRepo" class="area1 fancybox.iframe" href="<?=base_url()?>index.php/routers/search_aChurch" style="border-style: none none none solid; border-width: 1px; border-color: #D6957E; width: 100px">Church Repo</td>
+							<td id="churchRepo" class="area1 fancybox.iframe" href="<?=base_url()?>index.php/routers/search_aChurch" style="font-family: 'Courgette', cursive; border-style: none none none solid; border-width: 1px; border-color: #D6957E; width: 100px">Church Repo</td>
 						<?php } elseif ($this->session->userdata('logged') == '0') { } ?>
 						<?php if ($this->session->userdata('logged') == '1') { ?>
-							<td id="logout" style="	border-style: none none none solid; border-width: 1px; border-color: #D6957E; width: 100px" class="area1">Logout</td>
+							<td id="logout" style="	border-style: none none none solid; border-width: 1px; border-color: #D6957E; width: 100px; font-family: 'Courgette', cursive" class="area1">Logout</td>
 						<?php } elseif ($this->session->userdata('logged') == '0') { } ?>
 						<td>
 						<table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -411,7 +424,6 @@ function showResults(data, highlight) {
 						<td style="width: 400px">
 				<img id="logo" alt="" src="<?=base_url()?><?=$ldr?>images/logo.png" /></td>
 						<td>
-							<span class="font1" id="showUserBlink">Welcome <?=$this->session->userdata('username')?></span>
 						</td>
 					</tr>
 				</table> 
@@ -475,10 +487,22 @@ function showResults(data, highlight) {
 					<input placeholder="Begin Searching" id="q" name="Text2" spellcheck="false" autocomplete="off" class="searchBox1" type="text" style="width: 193pt; height: 17px" />
 					<div id="results"></div>
 				</span><br><br>
-				<span id="newMessageSpace">
-					<?  $query5 = $this->db->query("SELECT * FROM messages m INNER JOIN users u ON m.messageSentById = u.userid WHERE messageRecipientId = '{$userid}' AND m.notificationStatus = 'Unread' ORDER BY messageId DESC"); ?>
-						<!--<span style="font-family: tahoma; font-size: 10pt">You have <span style="color: #00416A">(<?=$query5->num_rows()?>)</span> new messages: <span id="numMessages" class="grab"><b>Click to view</b></span></span><br>-->
 
+					<?  $query6 = $this->db->query("SELECT * FROM friend f INNER JOIN users u ON f.userid_friends = u.userid
+																		   WHERE f.friendId_friends = '{$userid}' AND f.relationStatus_friends = 'requested'"); ?>
+					<span id="messagesList">
+					<?php foreach ($query6->result() as $row) { ?>
+						<a href="<?=base_url()?>index.php/routers/regUserDash?id=<?=$row->userid?>&requestedPageType=userProfiles" class="link-font1_dashboard"><strong><?=$row->firstname." ".$row->lastname?></strong></a><span class="font1"> wants to be your friend.</span>
+						<br><span class="grab"><strong>Accept</strong></span><span class="font1"> | </span><span id="deny" class="grab"><strong>Deny</strong></span>
+						<br><br>
+						<hr><br>
+					<? } ?>
+
+
+				<span id="newMessageSpace">
+					<?  $query5 = $this->db->query("SELECT * FROM messages m INNER JOIN users u ON m.messageSentById = u.userid
+																			 WHERE messageRecipientId = '{$userid}' AND m.notificationStatus = 'Unread'
+																			 ORDER BY messageId DESC"); ?>
 					<span id="messagesList">
 					<?php foreach ($query5->result() as $row) { ?>
 							<img align="left" style="padding: 3px" id="defaultImg a1" src="<?php echo base_url().$row->defaultImgURI; ?>" width="30" height="30" /></td>

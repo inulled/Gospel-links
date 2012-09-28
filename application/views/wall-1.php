@@ -78,7 +78,7 @@
 		'Comment</a><span class="font2"> | ' + entryCreationDateTime + '</span></td></tr><tr>'+
 		'<td class="style1" valign="top" colspan="2" style="height: 42px">'+
 		'<div id="commentLikeListing" style="width: 95%; display: none"></div>'+
-		'<input placeholder="Write a comment..." id="commentBox-' + idWallPosts + '" class="textbox1" style="width: 400px"></input>'+
+		'<input placeholder="Write a comment..." id="commentBox-' + idWallPosts + '" class="textbox1" style="width: 325px"></input>'+
 		'</td></tr><br></table>';
 	}
 
@@ -208,14 +208,33 @@
 		&nbsp;</td>
 		<td valign="top" colspan="2" style="height: 39px">
 		<span style="width: 100%; text-align: right">
-			<img id="logo" alt="" src="<?=base_url()?><?=$ldr?>images/logo.png" />
+			<img id="logo" alt="" src="<?=base_url()?><?=$ldr?>images/logo.png" /><br>
+						<span class="font1" style="text-align: left;
+									background-color: #fdffed;
+									padding: 3pt;
+									border-color: #CDCDCD;
+									border-top-style: solid;
+									border-right-style: solid;
+									border-bottom-style: solid;
+									border-left-style: solid;
+									border-bottom-width: 1pt;
+									border-right-width: 1pt;
+									border-left-width: 1pt;
+									border-top-width: 1pt;
+									border-radius: 3pt;">
+						<?php $rq = $_REQUEST['churchid'];
+							  $q1 = $this->db->query("SELECT * FROM church_repo WHERE churchId = '{$rq}'");
+							  foreach ($q1->result() as $row) {
+								echo $row->church_name;
+							  } ?>
+						</span>
 		&nbsp;</td>
 	</tr>
 	<tr>
 		<td valign="top" style="width: 503px">
 <table cellpadding="0" cellspacing="0" style="width: 400px;" align="left">
 									<td valign="top" class="text-align-left">
-									<table align="center" style="width: 100%" class="status-updater-box1">
+									<table align="left" style="width: 50%" class="status-updater-box1">
 										<tr>
 											<td>
 					<textarea autofocus id="updater" placeholder="What's on your mind?" class="updaterTextarea" name="TextArea2" style="border-radius: 3px; width: 400px" cols="20" rows="1"></textarea></td>
@@ -252,7 +271,7 @@
                                    WHERE wp.wpChurchId = '{$_REQUEST['churchid']}' ORDER BY wp.idwallPosts DESC LIMIT 200");
 foreach ($query2->result() as $row) { ?>
         <span id="new_posts"></span>
-    <table id="load_status_out-<?=$row->idwallPosts?>" cellpadding="0" cellspacing="0" style="width: 376px; height: 63px" class="status-border-bottom-box1">
+    <table id="load_status_out-<?=$row->idwallPosts?>" cellpadding="0" cellspacing="0" style="width: 300px; height: 63px" class="status-border-bottom-box1">
     <tr>
     	
         <td valign="top" rowspan="4" style="padding: 4px; width: 465px">
@@ -276,7 +295,7 @@ foreach ($query2->result() as $row) { ?>
         </td>
     </tr>
     <tr>
-        <td class="font1" valign="top" colspan="2" style="height: 40px">
+        <td class="font1" valign="top" colspan="1" style="height: 40px">
         <?php echo $row->entryData; ?></td>
         </tr>
     <tr>
@@ -297,7 +316,7 @@ foreach ($query2->result() as $row) { ?>
 			if ($query->num_rows() > 0) { ?>
 		<div id="likeList" style="display: none; width: 95%"></div>
 		<div id="commentsList" style="width: 96%">
-		<table cellpadding="0" cellspacing="0" style="width: 408px" class="style1 commentStyle">
+		<table cellpadding="0" cellspacing="0" class="style1 commentStyle">
 		<tr>
 		<td valign="top" style="width: 10px">
 		<img style="padding: 3px" id="defaultImg a0" src="<?=base_url().$row1->defaultImgURI?>" align="left" width="25px" height="25px" />
@@ -309,7 +328,7 @@ foreach ($query2->result() as $row) { ?>
 </table>
 		</div>
 		<?php } ?>
-		<input placeholder="Write a comment..." id="commentBox-<?php echo $row->idwallPosts; ?>" class="textbox1 commentBox" style="width: 398px"></input>
+		<input placeholder="Write a comment..." id="commentBox-<?php echo $row->idwallPosts; ?>" class="textbox1 commentBox" style="width: 325px"></input>
 		</td>
 		</tr>
 		
