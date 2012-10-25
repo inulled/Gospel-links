@@ -263,7 +263,7 @@ $(document).ready(function() {
 		//$sql1 = $this->db->query("SELECT * FROM church_repo, churchmembers INNER JOIN church_repo u ON u.churchId = churchmembers.cMchurchId WHERE churchmembers.cMuserId = '{$row->userid}'");
 		//foreach($sql1->result() as $row3) { ?>
 <span id="new_posts"></span>
-<table cellpadding="0" cellspacing="0" style="width: 506px; height: 49px" class="wallPosts">
+<table cellpadding="0" cellspacing="0" style="width: 506px; height: 49px" class="wallPosts" relOne="<?=$row->idwallPosts?>">
 	<tr>
 		<td valign="top" rowspan="5">
         <img style="padding: 3px" id="defaultImg a1" src="<?php echo base_url().$row->defaultImgURI; ?>" width="59" height="64" /></td>
@@ -273,14 +273,14 @@ $(document).ready(function() {
 	</tr>
 	<tr>
 		<td valign="top">
-			<span class="font1"><?=$row->entryData?></span>
+			<span class="font1_white"><?=$row->entryData?></span>
 		</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td valign="top">
 		<a class="link-font1 addComment" rel="<?=$row->idwallPosts?>">Add Comment&nbsp; </a><span class="font1">|&nbsp;</span> <a class="link-font1 viewCommentsLink" idbd="<?=$row->idwallPosts?>">
-		View Comments</a>&nbsp;<span class="font1"> |&nbsp;</span> <span class="font1"><?=date('m/d/Y h:ia ', strtotime($row->entryCreationDateTime))?></span></td>
+		View Comments</a>&nbsp;<span class="font1"> |&nbsp;</span> <span class="font1_white"><?=date('m/d/Y h:ia ', strtotime($row->entryCreationDateTime))?></span></td>
 		<td style="height: 19px"></td>
 	</tr>
 	<tr>
@@ -296,7 +296,7 @@ $(document).ready(function() {
 			<img style="padding: 3px" id="defaultImg a0" src="<?=base_url().$row1->defaultImgURI?>" align="left" width="25px" height="25px" />
 			&nbsp;</td>
 			<td valign="top" style="width: 319px">
-			<a href="<?=base_url()?>index.php/routers/regUserDash?id=<?=$row1->userid?>&requestedPageType=userProfiles" class="font1 link-font1"><b><?=$row1->firstname.' '.$row1->lastname?> </b></a><?=$row1->entryData."<br><!--<img delComment='$row1->idwallPostComments' src='".base_url().$ldr."images/dashboard/delButton.png' alt='Suni' style='float:right;' />-->".date('m/d/Y h:ia ', strtotime($row1->DateTimeCreated))?></a>
+			<a href="<?=base_url()?>index.php/routers/regUserDash?id=<?=$row1->userid?>&requestedPageType=userProfiles" class="font1 link-font1"><b><?=$row1->firstname.' '.$row1->lastname?> </b></a><?=$row1->entryData."<br><!--<img delComment='$row1->idwallPostComments' alt='Suni' style='float:right;' />-->".date('m/d/Y h:ia ', strtotime($row1->DateTimeCreated))?></a>
 			</td>
 		</tr>
 	</table>

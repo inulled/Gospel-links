@@ -231,18 +231,24 @@ $this->db->insert('wallPosts', $data);
 		echo json_encode(array('inserted' => true));
 	} public function ajaxMore() {
 		$id = $this->input->post('id');
-		$result = $this->db->query("SELECT * FROM wallposts WHERE idwallPosts < '$id' ORDER BY idwallPosts DESC LIMIT 9");
-
-		$idWallPostsArray = array();
-		foreach ($result->result() as $row) {
-			$idWallPostArray = array();
-			$idWallPostArray['idWallPosts'] = $row->idwallPosts;
-			$idWallPostsArray[] = $idWallPostArray;
+		$result = $this->db->query("SELECT * FROM wallposts WHERE idwallPosts < '$id' ORDER BY idwallPosts DESC OFFSET 0, 15");
+		foreach($result->result() as $row) {
+			echo json_encode(array('idwallPosts' => $row->idwallPosts));
 		}
-		echo json_encode(array("idWallPosts" => $idWallPostsArray));
-		//foreach($result->result() as $row) {
-	//		echo json_encode(array('idwallPosts' => $row->idwallPosts));
-		//}
+	} public function denyFriend_userProfiles() {
+		// the following is when the user accepts the friend request
+		$userid = $this->session->userdata('userid');
+		$targetedUserId = $this->input->post('targetedUserId');
+		
+		$this->db->query("DELETE FROM friend WHERE friendId_friends = '{$userid}' AND userid_friends = '{$targetedUserId}'");
+		echo json_encode(array('denyFriendSuccess' => TRUE));
+	} public  function acceptFriendNoty() {
+		// the following is when the user accepts the friend request
+		$userid = $this->session->userdata('userid');
+		$notyId = $this->input->post('notyId');
+		
+		$this->db->query("UPDATE friend SET relationStatus_friends = 'friends' WHERE friendId_friends = '{$userid}' AND userid_friends = '{$notyId}'");
+		echo json_encode(array('acceptNotyFriendSuccess' => TRUE));
 	}
 }
 ?>

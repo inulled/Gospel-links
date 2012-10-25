@@ -13,6 +13,8 @@
 	<script src="<?=base_url().$ldr?>scripts/lib/jquery.placeholder.js"></script>
 	<!-- Add jQuery-blink Plugin -->
 	<script type="text/javascript" src="<?=base_url()?>scripts/jquery-blink.js"></script>
+	<!-- Add hoverIntent Plugin -->
+	<script type="text/javascript" src="<?=base_url()?>scripts/jquery.hoverIntent.js"></script>
 	<!-- Add fancyBox main JS and CSS files -->
 	<script type="text/javascript" src="<?=base_url()?><?=$ldr?>scripts/source/jquery.fancybox.js"></script>
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?><?=$ldr?>scripts/source/jquery.fancybox.css" media="screen" />
@@ -149,7 +151,7 @@ $(document).ready(function() {
 		} else {
 			jQuery.ajax({
 			type: "POST",
-			dataType: "JSON", 
+			dataType: "JSON",
 			url: "<?=base_url()?>index.php/home/logsig",
 			data: dataString,
 			json: {session_state: true},
@@ -164,6 +166,12 @@ $(document).ready(function() {
 	   });
 	}
 	}
+	
+	
+	
+	
+	
+	
 
 	var runningRequest = false;
     var request;
@@ -190,17 +198,14 @@ $(document).ready(function() {
             showResults(data, $q.val());
             runningRequest = false;
         });
-
-
-
-
+        
 //Create HTML structure for the results and insert it on the result div
 function showResults(data, highlight) {
            var resultHtml = '';
             $.each(data, function(i, item) {
                 resultHtml += '<div class="result">';
                 resultHtml += '<img style="padding: 3px" id="defaultImg a0" src="' + item.defaultImgURI + '" align="left" width="25px" height="25px" />';
-                resultHtml += '<h2><a class="link-font3" href="<?=base_url()?>index.php/routers/regUserDash?id=' + item.userid + '&requestedPageType=userProfiles">' + item.firstname + ' ' + item.lastname + '</a></h2>';
+                resultHtml += '<a class="link-font3" href="<?=base_url()?>index.php/routers/regUserDash?id=' + item.userid + '&requestedPageType=userProfiles">' + item.firstname + ' ' + item.lastname + '</a>';
                 resultHtml += '</div>';
             });
 
@@ -211,6 +216,13 @@ function showResults(data, highlight) {
             e.preventDefault();
         });
     });
+
+
+
+
+
+
+
 
 	// the below takes all messages in the notification pane and hides then
     $(".messageBody").each(
@@ -245,6 +257,62 @@ function showResults(data, highlight) {
 		  }
 	});
 	}
+	
+	
+	jQuery(".notyAcceptFriendRequest").on('click', function() {
+		var tt = $(this);
+		notyId = jQuery(this).attr("notyIdOne"); // pull in the id of the current selected notification
+		userProfilesUserId = $('#requestAlert').attr('userProfilesUserId'); // pull in the id of the current selected user profile id
+		if (notyId == userProfilesUserId) { // if notification id is the same as the user profiles id, do the following
+			$.ajax({
+				type: "POST",
+				dataType: "JSON",
+				url: "<?=base_url()?>index.php/reguserDash/acceptFriendNoty",
+				data: {notyId: notyId},
+				json: {friendshipCaneled: true},
+				success: function(data) {
+					if(data.acceptNotyFriendSuccess == true) {
+						$("#requestAlert").replaceWith('<span class="font1">You two are now friends</span>'); // the user profile friend requester will be replaced with the text
+						$(tt).parents('#friendRequest').remove(); // find the '#friendRequest' id from the parent elements and fade it out
+					}
+		 	 	}
+			});
+		} else if (notyId != userProfilesUserId) {
+			/* the below will execute when the user
+			 * clicks the 'Add' button and he/she is
+			 * not on the targeted users page
+			 */
+			$.ajax({
+				type: "POST",
+				dataType: "JSON",
+				url: "<?=base_url()?>index.php/reguserDash/acceptFriendNoty",
+				data: {notyId: notyId},
+				json: {friendshipCaneled: true},
+				success: function(data) {
+					if(data.acceptNotyFriendSuccess == true) {
+						$(tt).parents('#friendRequest').remove();
+					}
+		 	 	}
+			});
+		}
+	});
+	
+	$('.newMessageHoveringDevice').mouseenter(function() {
+			$(this).css({"background-color":"#f9f9f9", "border":"1px solid silver"}).delay(300);
+	});
+	$('.newMessageHoveringDevice').mouseleave(function() {
+			$(this).css({"background-color":"#f9f9f9", "border":"1px dashed #CCCCCC"});
+	});
+	
+	/*var timer;
+	$(".newMessageHoveringDevice").on("mouseenter", "div", function() {
+    	timer = setInterval(function () {
+        	$(this).css({"background-color":"black"});
+    	}, 2000);
+	}).on("mouseleave", "div", function(){
+    	clearTimeout(timer);
+    	$(this).css({"background-color":"#f9f9f9"});
+	});*/
 });
 </script>
 <style type="text/css">
@@ -280,7 +348,7 @@ function showResults(data, highlight) {
       span.highlight {
        background:#FCFFA3;
        padding:3px;
-       font-weight:bold;
+       font-weight:normal;
       }
 .dropdownResults {
 	 position: fixed;
@@ -371,6 +439,38 @@ function showResults(data, highlight) {
 	width: 50pt;
 	text-align: center;
 }
+.noty-reply {
+padding: 2px;
+border: 1px solid silver;
+padding: 5px;
+font-family: tahoma;
+font-size: 11px;
+outline: none;
+border-radius: 3px;
+}
+.newFont1_dashboard { font-family: Tahoma; font-size: 11px }
+.newLinkFont1_dashboard {
+	font-family: Tahoma; font-size: 11px;
+	color: #2e6079;
+	cursor: pointer;
+	text-decoration: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+.action_button {
+	background-color: white;
+	border: 1px solid gray;
+	font-family: tahoma;
+	font-size: 10pt;
+	font-weight: bold;
+	padding: 4px;
+	margin: 3px;
+	border-radius: 2px;
+}
 </style>
 </head>
 <?php	/*$userid = $this->session->userdata('userid');
@@ -378,7 +478,7 @@ function showResults(data, highlight) {
         $row = $query1->row();
         foreach ($query1->result() as $row1) { */
 ?>
-<body style="background-color: #f9f9f9;"> <!-- old: f9f9f9, #ede8cb, fcf7da -->
+<body style="background-color: #294052"> <!-- old: f9f9f9, #ede8cb, fcf7da -->
 		<?php $logged = $this->session->userdata('logged');
 			  if ($logged == '1') { ?>
 		<table style="width: 100%" align="center" class="navbarStyle">
@@ -482,9 +582,9 @@ function showResults(data, highlight) {
 									</span>
 
 		<?php } elseif ($this->session->userdata('logged') == '1') { ?>
-			<div class="notificationsPane" style="position: fixed; top: 0pt; width: 285px; overflow-x: hidden; overflow-y: scroll; height: 300pt">
+			<div class="notificationsPane" style="position: fixed; top: 0pt; width: 300px; overflow-x: hidden; overflow-y: scroll; height: 300pt">
 				<span style="position: fixed; background-color: white">
-					<input placeholder="Begin Searching" id="q" name="Text2" spellcheck="false" autocomplete="off" class="searchBox1" type="text" style="width: 193pt; height: 17px" />
+					<input placeholder="Begin Searching" id="q" name="Text2" spellcheck="false" autocomplete="off" class="searchBox1" type="text" style="width: 205pt; height: 17px" />
 					<div id="results"></div>
 				</span><br><br>
 
@@ -492,10 +592,13 @@ function showResults(data, highlight) {
 																		   WHERE f.friendId_friends = '{$userid}' AND f.relationStatus_friends = 'requested'"); ?>
 					<span id="messagesList">
 					<?php foreach ($query6->result() as $row) { ?>
-						<a href="<?=base_url()?>index.php/routers/regUserDash?id=<?=$row->userid?>&requestedPageType=userProfiles" class="link-font1_dashboard"><strong><?=$row->firstname." ".$row->lastname?></strong></a><span class="font1"> wants to be your friend.</span>
-						<br><span class="grab"><strong>Accept</strong></span><span class="font1"> | </span><span id="deny" class="grab"><strong>Deny</strong></span>
-						<br><br>
-						<hr><br>
+						<div id="friendRequest">
+						<a href="<?=base_url()?>index.php/routers/regUserDash?id=<?=$row->userid?>&requestedPageType=userProfiles" class="newLinkFont1_dashboard"><strong><?=$row->firstname." ".$row->lastname?></strong></a><span class="newFont1_dashboard newMessageStyle"><strong> wants to be your friend.</strong></span>
+							<div>
+								<input type="submit" notyIdOne="<?=$row->userid?>" value="Accept" style="width: 58px; height: 25px" class="button1 notyAcceptFriendRequest">
+								<input type="submit" id="notyDenyFriendRequest" value="Deny" style="width: 50px; height: 25px" class="button1">
+							</div><br>
+						</div>
 					<? } ?>
 
 
@@ -505,15 +608,13 @@ function showResults(data, highlight) {
 																			 ORDER BY messageId DESC"); ?>
 					<span id="messagesList">
 					<?php foreach ($query5->result() as $row) { ?>
-							<img align="left" style="padding: 3px" id="defaultImg a1" src="<?php echo base_url().$row->defaultImgURI; ?>" width="30" height="30" /></td>
-							<a class="link-font1_dashboard" href="<?=base_url()?>index.php/routers/regUserDash?id=<?=$row->userid?>&requestedPageType=userProfiles"><strong><?=$row->firstname." ".$row->lastname?></strong></a></span>
-							<span class="messageBody" style="font-family: tahoma; font-size: 8pt"> messaged you: "<?=$row->messageBody?>"</span>
-							<br />
-							<input type="text" style="font-family: tahoma; font-size: 8pt; width: 192pt; border-radius: 3px" id="respond" autocomplete="off" placeholder="Respond and press enter" class="textbox2 respond" /><br>
+							<div style="padding: 3pt; background-color: #f9f9f9; border: 1px dashed #CCCCCC" class="newFont1_dashboard newMessageHoveringDevice"><strong>New Message from </strong>
+							<a class="newLinkFont1_dashboard" href="<?=base_url()?>index.php/routers/regUserDash?id=<?=$row->userid?>&requestedPageType=userProfiles"><strong><?=$row->firstname." ".$row->lastname?>:</strong></a></span></div>
+							<div style="padding: 3pt" class="newFont1_dashboard newMessageStyle"><?=$row->messageBody?></div>
+							<input name="reply" placeholder="Quick Reply" spellcheck="false" autocomplete="off" type="text" id="respond" class="noty-reply respond" size="50%"><br><br>
 						<? } ?>
 					</span>
 				</span>
-				<br><br><br><br><br>
 			</div>
 		<?php } ?>
 

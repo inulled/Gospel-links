@@ -1,12 +1,8 @@
 <? $id = $this->input->post('id'); $logged = $this->session->userdata('logged'); include('vh.php'); ?>
 		<td valign="top" style="width: 506px">
 <?php $this->load->helper('date');
-	  $userid = $this->session->userdata('userid');
-	   $query = $this->db->query("SELECT * FROM wallposts wp, users u WHERE u.userid = wp.postingUserId AND wp.idWallPosts < '$id' ORDER BY wp.idWallPosts DESC LIMIT 50");
-      foreach ($query->result() as $row) {
-      	$idwall = $row->idwallPosts;
-		//$sql1 = $this->db->query("SELECT * FROM church_repo, churchmembers INNER JOIN church_repo u ON u.churchId = churchmembers.cMchurchId WHERE churchmembers.cMuserId = '{$row->userid}'");
-		//foreach($sql1->result() as $row3) { ?>
+	  $query = $this->db->query("SELECT * FROM wallposts wp, users u WHERE u.userid = wp.postingUserId AND wp.idWallPosts < '$id' ORDER BY wp.idWallPosts DESC LIMIT 50");
+      foreach ($query->result() as $row) { ?>
 <span id="new_posts"></span>
 <table cellpadding="0" cellspacing="0" relOne="<?=$row->idwallPosts?>" style="width: 506px; height: 49px" class="wallPosts">
 	<tr>

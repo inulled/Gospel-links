@@ -185,5 +185,20 @@ class home extends CI_Controller {
 			if ($query->num_rows() == 1) {
 				echo $query->num_rows();
 			}
+		} public function uploadDefaultImg() {
+			$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|jpeg|png';
+			$this->load->library('upload', $config);
+			$userid1 = $this->session->userdata('userid');
+			
+			if (!$this->upload->do_upload()) {
+				$error = array('error' => $this->upload->display_errors());
+				$this->load->view('defaultImgUploadFailure', $error);
+			} else {
+				$data = array('upload_data' => $this->upload->data());
+				$this->load->view('defaultImgUploadSuccess', $data);
+				//{$config['file_type']}
+				$this->db->query("SELECT * FROM users SET defaultImgURI = '123' WHERE userid = '{$userid1}'");
+			}
 		}
 }

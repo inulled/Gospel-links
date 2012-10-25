@@ -7,7 +7,7 @@ text-align: left;
 }
 .status-updater-box1 {
 	border: 1px solid #CDCDCD;
-	background-color: #FFFFFF;
+	background-color: #E2E2E2;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
 }
@@ -240,7 +240,7 @@ color: #3F32D0;
 .link-font1 {
 font-family: Verdana;
 font-size: 8pt;
-color: #924227;
+color: #D6E3B5; //924227
 text-decoration: none;
 cursor: pointer;
 -webkit-user-select: none;
@@ -382,7 +382,7 @@ user-select: none;
 .link-font1_dashboard {
 	font-family: Verdana;
 	font-size: 8pt;
-	color: #924227;
+	color: #2e6079;
 	cursor: pointer;
 	text-decoration: none;
 	-webkit-user-select: none;
@@ -410,4 +410,10 @@ user-select: none;
 	-ms-user-select: none;
 	-o-user-select: none;
 	user-select: none;
+}
+.font1_white {
+	font-family: Tahoma;
+	font-size: 10pt;
+	font-weight: normal;
+	color: white;
 }

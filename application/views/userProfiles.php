@@ -133,20 +133,20 @@ $(document).ready(function() {
 	var Isexcuted = 0;
 	function sendMessageAppendData() {
 		Isexcuted = 1;
-    	return '<table id="newMessageBox1" cellpadding="0" cellspacing="0" style="border-radius: 3pt; width: 267px; border: 1px solid #CCCCCC">'+
+    	return '<table id="newMessageBox1" cellpadding="0" cellspacing="0" style="width: 212pt; border: 1px solid #CCCCCC">'+
 			   '<tr>'+
 			   '<td valign="top" class="font1" style="text-align: center; padding: 3pt">You are messaging <?php echo $row->firstname." ".$row->lastname ?></td>'+
 			   '</tr>'+
 			   '<tr>'+
 			   '<td valign="top" style="text-align: center; width: 253px; padding: 3pt">'+
-			   '<input autofocus placeholder="Type your message" id="responseMessage" spellcheck="false" autocomplete="off" class="textbox1" type="text" style="width: 185pt; height: 17px" /></td>'+
+			   '<input autofocus placeholder="Type your message" id="responseMessage" spellcheck="false" autocomplete="off" class="textbox1" type="text" style="width: 196pt; height: 17px" /></td>'+
 			   '</tr>'+
-			   '</table>';
+			   '</table><br>';
 	}
 
 	$('#clickSendAMessage').live('click', function() {
 		if (Isexcuted == 0) {
-			$('#newMessageSpace').prepend(sendMessageAppendData());
+			$('#messagesList').prepend(sendMessageAppendData());
 		}
 	});
        var ide1 = $(document).getUrlParam("id");
@@ -198,6 +198,9 @@ $(document).ready(function() {
 	$('#cancelFriendship').live('click', function() {
 		cancelFriendship();
 	});
+	$("#denyRequest").live('click', function() {
+		denyFriend();
+	});
 
 	var targetedUserId = $(document).getUrlParam("id");
 	
@@ -227,6 +230,19 @@ $(document).ready(function() {
 			}
 		  }
 	   });
+	} function denyFriend() {
+		jQuery.ajax({
+			type: "POST",
+			dataType: "JSON",
+			url: "<?=base_url()?>index.php/regUserDash/denyFriend_userProfiles",
+			data: { targetedUserId: targetedUserId },
+			json: {acceptFriendSuccess: true},
+			success: function(data) {
+			if(data.denyFriendSuccess == true) {
+				$("#requestAlert").replaceWith('<span class="font1">This friend request has been canceled</span>');
+			}
+		  }
+	   });
 	} function cancelFriendship() {
 		jQuery.ajax({
 			type: "POST",
@@ -236,7 +252,7 @@ $(document).ready(function() {
 			json: {friendshipCaneled: true},
 			success: function(data) {
 			if(data.friendshipCanceled == true) {
-				$("#cancelFriendship").replaceWith('<span class="font1">You two are no longer friends </span>');
+				$("#cancelFriendship").replaceWith('<span class="font1">You two are no longer friends</span>');
 			}
 		  }
 	   });
@@ -278,7 +294,7 @@ $(document).ready(function() {
           foreach($query1->result() as $row) { ?>
                         <script type="text/javascript">
                                 $(document).ready(function() {
-                                        $("#addFriend").replaceWith('<span id="requestAlert"><span class="font1">wants to be your friend&nbsp;</span><input type="submit" id="acceptRequest" value="Accept" style="width: 60px; height: 28px" class="button1" />&nbsp;<input type="submit" id="denyRequest" value="Deny" style="width: 50px; height: 28px" class="button1" /></span>');
+                                        $("#addFriend").replaceWith('<span userProfilesUserId="<?=$selectedId?>" id="requestAlert"><span class="font1">wants to be your friend&nbsp;</span><input type="submit" id="acceptRequest" value="Accept" style="width: 60px; height: 28px" class="button1" />&nbsp;<input type="submit" id="denyRequest" value="Deny" style="width: 50px; height: 28px" class="button1" /></span>');
                                 });
                         </script>
 <?php } $query1 = $this->db->query("SELECT * FROM friend WHERE relationStatus_friends = 'requested' AND userid_friends = '${myuserid}' AND friendId_friends = '$selectedId'");
@@ -297,7 +313,7 @@ $(document).ready(function() {
                                 });
                         </script>
 <?php } } if ($myuserid != $selectedId) { ?>
-<br><div id="clickSendAMessage" class="grab">Send a message</div>
+<br><span id="clickSendAMessage" class="grab">Send a message</span>
 <?php } ?>
 			<div id="dynoSpace"></div>
 			<div id="viewMyInfoSlider" style="display: none">

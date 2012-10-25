@@ -1,3 +1,30 @@
+			
+			<head>
+			<style type="text/css">
+			.optionsBoxHeaderStyle {
+				border-style: none solid solid solid;
+				border-width: 1px;
+				border-color: #D7D6BD;
+				background-color: #E9E8D4;
+				font-family: tahoma;
+				font-size: 10pt;
+				padding: 3pt;
+			}
+			.optionsBoxMiddle {
+				background-color: #F0F0E1;
+				font-family: tahoma;
+				font-size: 10pt;
+				padding: 3pt;
+			}
+			.topBox_viewMyInfoSlider {
+				border-style: solid solid solid none;
+				border-width: 1px;
+				border-color: #D7D6BD;
+				padding: 3pt;
+			}
+			</style>
+			</head>
+
 			<?php $userid = $this->session->userdata('userid');
 			 $selectedId = $_REQUEST['id'];
 			$selectUserInfo = $this->db->query("SELECT * FROM user_info WHERE userid = '{$_REQUEST['id']}'");
@@ -41,6 +68,9 @@
 					<span class="font1">Neighborhood: <?=$row->neighborhood?></span><br>
 					<span class="font1">Websites: <?=$row->websites?></span><br>
 					<span class="font1">Email: <?=$row->email?></span><br>
+			<br>
+			<br>
+
 		<?php } 
 			} else { ?>
 				<span class='font1'>You need to add info! <a id='addEditUserInfoClicker' class='headerFont1'>Click here</a> to add data to your info page.</span>
