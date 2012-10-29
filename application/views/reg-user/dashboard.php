@@ -478,7 +478,7 @@ border-radius: 3px;
         $row = $query1->row();
         foreach ($query1->result() as $row1) { */
 ?>
-<body style="background-color: #294052"> <!-- old: f9f9f9, #ede8cb, fcf7da -->
+<body background='<?=base_url()?>images/bg1.png'> <!-- old: f9f9f9, #ede8cb, fcf7da 294052 -->
 		<?php $logged = $this->session->userdata('logged');
 			  if ($logged == '1') { ?>
 		<table style="width: 100%" align="center" class="navbarStyle">

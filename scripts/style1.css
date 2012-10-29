@@ -417,3 +417,18 @@ user-select: none;
 	font-weight: normal;
 	color: white;
 }
+.font2_white {
+	font-family: Verdana;
+	font-size: 8pt;
+	font-weight: normal;
+	color: white;
+}
+.textbox3 {
+	padding: 2px;
+	border: 1px solid silver;
+	padding: 5px;
+	font-family: tahoma;
+	font-size: 11px;
+	outline: none;
+	border-radius: 3px;
+}

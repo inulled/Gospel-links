@@ -39,7 +39,7 @@ $(document).ready(function() {
 		});
 		
 		// the below function handles the procedures needed to add a comment
-		jQuery(".textbox1").live('keydown', function(event) {
+		jQuery(".textbox3").live('keydown', function(event) {
 	    	var keyCode = event.keyCode || event.which;
 			if (keyCode === 13) {
 				// below is the bootstrapper for the addComment function
@@ -74,7 +74,7 @@ $(document).ready(function() {
 				});
 			}
 		}); function addNewCommentData(defaultImgURI, firstname, lastname, returnedData, entryCreationDateTime) {
-		return '<table cellpadding="0" cellspacing="0" style="width: 96.3%" class="style1 commentStyle">'+
+		return '<table cellpadding="0" cellspacing="0" style="width: 96.3%" class="font1_white commentStyle">'+
 		'<tr>'+
 		'<td valign="top" style="width: 10px">'+
 		'<img style="padding: 3px" id="defaultImg a0" src="' + defaultImgURI + '" align="left" width="25px" height="25px" />'+
@@ -268,7 +268,7 @@ $(document).ready(function() {
 		<td valign="top" rowspan="5">
         <img style="padding: 3px" id="defaultImg a1" src="<?php echo base_url().$row->defaultImgURI; ?>" width="59" height="64" /></td>
 		<td valign="top">
-        <a href="<?=base_url()?>index.php/routers/regUserDash?id=<?=$row->userid?>&requestedPageType=userProfiles" class="font1 link-font1 postname"><b><?=$row->firstname . " " . $row->lastname?></b></a>
+        <a href="<?=base_url()?>index.php/routers/regUserDash?id=<?=$row->userid?>&requestedPageType=userProfiles" style="text-decoration: none" class="font1 link-font1 postname"><b><?=$row->firstname . " " . $row->lastname?></b></a>
 		<td style="height: 19px"></td>
 	</tr>
 	<tr>
@@ -296,7 +296,7 @@ $(document).ready(function() {
 			<img style="padding: 3px" id="defaultImg a0" src="<?=base_url().$row1->defaultImgURI?>" align="left" width="25px" height="25px" />
 			&nbsp;</td>
 			<td valign="top" style="width: 319px">
-			<a href="<?=base_url()?>index.php/routers/regUserDash?id=<?=$row1->userid?>&requestedPageType=userProfiles" class="font1 link-font1"><b><?=$row1->firstname.' '.$row1->lastname?> </b></a><?=$row1->entryData."<br><!--<img delComment='$row1->idwallPostComments' alt='Suni' style='float:right;' />-->".date('m/d/Y h:ia ', strtotime($row1->DateTimeCreated))?></a>
+			<a href="<?=base_url()?>index.php/routers/regUserDash?id=<?=$row1->userid?>&requestedPageType=userProfiles" style="text-decoration: none" class="font1 link-font1"><b><?=$row1->firstname.' '.$row1->lastname?></b></a> <span class="font2_white"><?=$row1->entryData."<br><!--<img delComment='$row1->idwallPostComments' alt='Suni' style='float:right;' />-->".date('m/d/Y h:ia ', strtotime($row1->DateTimeCreated))?></a>
 			</td>
 		</tr>
 	</table>
@@ -309,7 +309,7 @@ $(document).ready(function() {
 	<tr>
 		<td valign="top" style="width: 408px" rowspan="2">
 		<span style="display: none" id="commentBox-<?=$row->idwallPosts?>">
-			<input placeholder="Write a comment..." class="textbox1" postuserid="<?=$row->postingUserId?>" id="commentBox1-<?=$row->idwallPosts?>" style="width: 398px"></input>
+			<input placeholder="Write a comment..." class="textbox3" postuserid="<?=$row->postingUserId?>" id="commentBox1-<?=$row->idwallPosts?>" style="width: 398px"></input>
 		</span>
 		</td>
 		<td style="height: 1px"></td>
